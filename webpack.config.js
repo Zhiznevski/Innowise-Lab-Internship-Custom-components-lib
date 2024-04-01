@@ -5,6 +5,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'umd',
     clean: true,
   },
   mode: 'production',
@@ -16,6 +17,19 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+        ],
+      },
       {
         test: /\.(ts|tsx)?$/,
         use: 'ts-loader',
