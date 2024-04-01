@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {
-        "target": "es6",                        
-        "module": "commonjs",
-        "noImplicitAny": true,
-        "removeComments": true,                    
-        "jsx": "react",                           
-        "strict": true,                          
-        "esModuleInterop": true,                  
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "declaration": true
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"]
-  }
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "declaration": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
