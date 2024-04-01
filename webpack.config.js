@@ -9,7 +9,7 @@ module.exports = {
   },
   mode: 'production',
   resolve: {
-    extensions: ['.tsx', '.ts', 'js'],
+    extensions: ['.ts', 'js', '.tsx'],
   },
   externals: {
     react: 'react',
