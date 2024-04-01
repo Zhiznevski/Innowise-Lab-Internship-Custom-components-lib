@@ -45,6 +45,6 @@
     "dist"
   ],
   "lint-staged": {
-    "**/*.{ts, tsx}": "npm run format"
+    "*.{ts,tsx}": "npm run format"
   }
 }
