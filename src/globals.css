@@ -1,0 +1,14 @@
+:root {
+  --font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+
+  --font-color-prime: #1976d2;
+  --font-color-disabled: rgba(0, 0, 0, 0.26);
+
+  --background-color-prime: #1976d2;
+  --background-color-prime-hover: #1364b4;
+  --background-color-text-hover: #f7fafc;
+  --background-color-contained-disabled: rgba(0, 0, 0, 0.12);
+
+  --border-color-outlined: rgba(25, 118, 210, 0.5);
+  --border-color-disabled: rgba(0, 0, 0, 0.12);
+}
