@@ -5,7 +5,11 @@
   background: transparent;
 }
 
-.bigBtn {
-  font-size: 30px;
-  padding: 20px;
+.outlined {
+}
+
+.contained {
+}
+
+.text {
 }

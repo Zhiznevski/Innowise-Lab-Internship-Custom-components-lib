@@ -3,14 +3,16 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    filename: 'main.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
-    libraryTarget: 'umd',
+    library: {
+      type: 'umd'
+    },
     clean: true,
   },
   mode: 'production',
   resolve: {
-    extensions: ['.ts', 'js', '.tsx'],
+    extensions: ['.ts', '.tsx'],
   },
   externals: {
     react: 'react',

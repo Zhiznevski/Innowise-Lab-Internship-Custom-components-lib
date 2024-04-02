@@ -15,7 +15,9 @@
     "no-debugger": "off",
     "no-console": "warn",
     "class-methods-use-this": "off",
+    "react/require-default-props": "off",
     "newline-per-chained-call": "error", 
+    "import/no-extraneous-dependencies": "off",
     "prettier/prettier": [
       "error",
       {
