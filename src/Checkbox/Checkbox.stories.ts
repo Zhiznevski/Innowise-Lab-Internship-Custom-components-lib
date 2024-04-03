@@ -25,6 +25,7 @@ export const Unchecked: Story = {
   args: {
     checked: false,
     disabled: false,
+    label: 'unchecked',
   },
 };
 
@@ -32,6 +33,7 @@ export const Checked: Story = {
   args: {
     checked: true,
     disabled: false,
+    label: 'checked',
   },
 };
 
@@ -39,6 +41,7 @@ export const DisabledCheked: Story = {
   args: {
     disabled: true,
     checked: true,
+    label: 'disabled',
   },
 };
 
@@ -46,5 +49,6 @@ export const DisabledUncheked: Story = {
   args: {
     disabled: true,
     checked: false,
+    label: 'disabled',
   },
 };

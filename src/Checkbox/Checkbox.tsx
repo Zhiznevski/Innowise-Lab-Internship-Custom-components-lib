@@ -14,8 +14,10 @@ function Checkbox({
   onChange = () => {},
   label = 'checkbox',
 }: CheckboxProps) {
+  const wrapperClasses = [styles.wrapper];
+  if (disabled) wrapperClasses.push(styles.disabled);
   return (
-    <div className={styles.wrapper}>
+    <div className={wrapperClasses.join(' ')}>
       <input
         className={styles.input}
         id="cbx"
