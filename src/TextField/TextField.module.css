@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import '../globals.css';
 
 .wrapper {
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.4375em;
@@ -21,6 +21,7 @@
   position: absolute;
   bottom: 5px;
   left: 12px;
+  font-family: var(--font-family);
   font-size: 16px;
   color: rgba(0, 0, 0, 0.5);
   transform-origin: 0 0;
@@ -58,21 +59,6 @@
 .input:hover {
   background: rgba(0, 0, 0, 0.04);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.5);
-}
-
-.input:not(:-moz-placeholder-shown) + .label {
-  color: rgba(0, 0, 0, 0.5);
-  transform: translate3d(0, -12px, 0) scale(0.75);
-}
-
-.input:not(:-ms-input-placeholder) + .label {
-  color: rgba(0, 0, 0, 0.5);
-  transform: translate3d(0, -12px, 0) scale(0.75);
-}
-
-.input:not(:placeholder-shown) + .label {
-  color: rgba(0, 0, 0, 0.5);
-  transform: translate3d(0, -12px, 0) scale(0.75);
 }
 
 .input:focus {

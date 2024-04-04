@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import '../globals.css';
 
 .wrapper {
   width: 100%;
@@ -51,7 +51,7 @@
   margin-left: 10px;
   vertical-align: middle;
   cursor: pointer;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.5;
@@ -60,7 +60,7 @@
 
 .input:checked ~ .checkbox {
   border-color: transparent;
-  background: #1976d2;
+  background: var(--background-color-prime);
 }
 
 .input:checked ~ .checkbox:after {

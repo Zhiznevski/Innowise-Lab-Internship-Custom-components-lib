@@ -33,7 +33,7 @@ export default function ModalApp() {
   const handleOpen = () => setOpen(true);
   return (
     <>
-      <Button onClick={handleOpen} />
+      <Button onClick={handleOpen}>open modal</Button>
       {createPortal(
         <Modal open={open} onClose={handleClose}>
           <MockChildren />

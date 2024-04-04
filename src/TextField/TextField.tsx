@@ -21,7 +21,9 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
     ref
   ) => {
     const [value, setValue] = useState('');
+
     useImperativeHandle(ref, () => ({ getValue: () => value }));
+
     const TextFieldLabel = error ? 'error' : label;
     const inputClasses = [styles.input, styles[variant]];
     if (error) inputClasses.push(styles.error);
