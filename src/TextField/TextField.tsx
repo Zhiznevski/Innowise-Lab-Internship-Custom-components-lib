@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import styles from './TextField.module.css';
 
-type Variant = 'outlined' | 'filled' | 'standart';
-type Label = 'Outlined' | 'Filled' | 'Standart';
+type Variant = 'outlined' | 'filled' | 'standard';
+type Label = 'Outlined' | 'Filled' | 'Standard';
 
 export interface TextFieldProps {
   variant?: Variant;
@@ -24,10 +24,14 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
 
     useImperativeHandle(ref, () => ({ getValue: () => value }));
 
-    const TextFieldLabel = error ? 'error' : label;
+    // const TextFieldLabel = error ? 'error' : label;
     const inputClasses = [styles.input, styles[variant]];
-    if (error) inputClasses.push(styles.error);
+    const labelClasses = [styles.label];
     if (disabled) inputClasses.push(styles.disabled);
+    if (variant === 'standard') labelClasses.push(styles.standardLabel);
+    if (variant === 'outlined') labelClasses.push(styles.outlinedLabel);
+    if (error) labelClasses.push(styles.errorLabel);
+    if (error) inputClasses.push(styles.errorInput);
 
     return (
       <label htmlFor="inp" className={styles.wrapper}>
@@ -40,8 +44,7 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
           placeholder="&nbsp;"
           disabled={disabled}
         />
-        <span className={styles.label}>{TextFieldLabel}</span>
-        <span className={styles.focusBg} />
+        <span className={labelClasses.join(' ')}>{label}</span>
       </label>
     );
   }

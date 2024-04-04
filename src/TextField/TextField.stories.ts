@@ -20,16 +20,16 @@ export const Outlined: Story = {
   },
 };
 
-export const Checked: Story = {
+export const Filled: Story = {
   args: {
     variant: 'filled',
     disabled: false,
   },
 };
 
-export const DisabledCheked: Story = {
+export const Standard: Story = {
   args: {
-    variant: 'standart',
+    variant: 'standard',
     disabled: false,
   },
 };
