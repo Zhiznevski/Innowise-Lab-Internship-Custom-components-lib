@@ -1,5 +1,6 @@
 .switchWrapper {
   position: relative;
+  display: inline-block;
 }
 
 .switch {

@@ -34,18 +34,20 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
     if (error) inputClasses.push(styles.errorInput);
 
     return (
-      <label htmlFor="inp" className={styles.wrapper}>
-        <input
-          className={inputClasses.join(' ')}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          type="text"
-          id="inp"
-          placeholder="&nbsp;"
-          disabled={disabled}
-        />
-        <span className={labelClasses.join(' ')}>{label}</span>
-      </label>
+      <div className={styles.container}>
+        <label htmlFor="inp" className={styles.wrapper}>
+          <input
+            className={inputClasses.join(' ')}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            type="text"
+            id="inp"
+            placeholder="&nbsp;"
+            disabled={disabled}
+          />
+          <span className={labelClasses.join(' ')}>{label}</span>
+        </label>
+      </div>
     );
   }
 );
