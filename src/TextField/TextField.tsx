@@ -1,8 +1,7 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { MouseEventHandler, forwardRef, useImperativeHandle, useState } from 'react';
 import styles from './TextField.module.css';
-import ArrowIcon from './icon.svg';
 
-type Variant = 'outlined' | 'filled' | 'standard';
+export type Variant = 'outlined' | 'filled' | 'standard';
 type Label = 'Outlined' | 'Filled' | 'Standard';
 
 export interface TextFieldProps {
@@ -11,6 +10,7 @@ export interface TextFieldProps {
   label?: Label;
   disabled?: boolean;
   select?: boolean;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export type TextFieldHandle = {
@@ -25,6 +25,7 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
       label = 'Outlined',
       disabled = false,
       select = false,
+      onClick,
     }: TextFieldProps,
     ref
   ) => {
@@ -42,7 +43,13 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
     if (error) inputClasses.push(styles.errorInput);
 
     return (
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        onClick={onClick}
+        role="button"
+        tabIndex={0}
+        aria-hidden // need to fix it
+      >
         <label htmlFor="inp" className={styles.wrapper}>
           <input
             readOnly={select}
@@ -56,9 +63,6 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
             disabled={disabled}
           />
           <span className={labelClasses.join(' ')}>{label}</span>
-          <div className={styles.icon}>
-            <ArrowIcon />
-          </div>
         </label>
       </div>
     );

@@ -1,3 +1,16 @@
 .wrapper {
+  position: relative;
   cursor: pointer;
+}
+
+.icon {
+  pointer-events: none;
+  position: absolute;
+  top: 26px;
+  right: 20px;
+}
+
+.icon[data-open='true'] {
+  transform: rotate(180deg);
+  top: 22px;
 }

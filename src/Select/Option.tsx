@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Option.module.css';
 
 export interface OptionType {
   title: string;
@@ -11,9 +12,16 @@ export interface OptionProps {
 
 function Option({ option, onClick }: OptionProps) {
   return (
-    <button type="button" onClick={onClick}>
+    <li
+      className={styles.li}
+      tabIndex={0}
+      role="option"
+      aria-selected
+      onClick={onClick}
+      onKeyDown={onClick}
+    >
       {option.title}
-    </button>
+    </li>
   );
 }
 

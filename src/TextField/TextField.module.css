@@ -7,8 +7,10 @@
 
 .icon {
   position: absolute;
-  top: 0;
-  left: 0;
+  right: 5px;
+  bottom: 0;
+  cursor: pointer;
+  pointer-events: none;
 }
 
 .wrapper {
@@ -21,7 +23,6 @@
   box-sizing: border-box;
   position: relative;
   margin: auto;
-  width: 25ch;
   border-radius: 3px;
   overflow: hidden;
 }

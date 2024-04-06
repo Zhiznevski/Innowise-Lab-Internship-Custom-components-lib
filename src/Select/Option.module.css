@@ -1,0 +1,23 @@
+@import '../globals.css';
+.li {
+  cursor: pointer;
+  user-select: none;
+  color: inherit;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  padding: 6px 16px;
+  box-sizing: border-box;
+}
+
+.li:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.04);
+}
