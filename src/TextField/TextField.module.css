@@ -5,6 +5,12 @@
   padding: 10px;
 }
 
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .wrapper {
   font-family: var(--font-family);
   font-weight: 400;
