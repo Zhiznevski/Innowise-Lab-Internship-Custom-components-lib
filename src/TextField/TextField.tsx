@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import styles from './TextField.module.css';
 
 export type Variant = 'outlined' | 'filled' | 'standard';
@@ -10,14 +10,12 @@ export interface TextFieldProps {
   label?: Label;
   disabled?: boolean;
   select?: boolean;
-  onClick?: MouseEventHandler<HTMLDivElement>;
+  selectedValue?: string;
+  onClick?: () => void;
 }
 
-export type TextFieldHandle = {
-  getValue: () => string;
-};
-
-const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
+type Ref = HTMLInputElement;
+const TextField = forwardRef<Ref, TextFieldProps>(
   (
     {
       variant = 'outlined',
@@ -25,15 +23,13 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
       label = 'Outlined',
       disabled = false,
       select = false,
+      selectedValue,
       onClick,
     }: TextFieldProps,
     ref
   ) => {
     const [value, setValue] = useState('');
 
-    useImperativeHandle(ref, () => ({ getValue: () => value }));
-
-    // const TextFieldLabel = error ? 'error' : label;
     const inputClasses = [styles.input, styles[variant]];
     const labelClasses = [styles.label];
     if (disabled) inputClasses.push(styles.disabled);
@@ -42,24 +38,30 @@ const TextField = forwardRef<TextFieldHandle, TextFieldProps>(
     if (error) labelClasses.push(styles.errorLabel);
     if (error) inputClasses.push(styles.errorInput);
 
+    const handleClick = () => {
+      setValue(' ');
+      if (onClick) onClick();
+    };
+
     return (
       <div
         className={styles.container}
-        onClick={onClick}
+        onClick={select ? handleClick : undefined}
         role="button"
         tabIndex={0}
         aria-hidden // need to fix it
       >
         <label htmlFor="inp" className={styles.wrapper}>
           <input
+            ref={ref}
             readOnly={select}
-            style={{ cursor: select ? 'pointer' : 'default' }}
+            style={{ cursor: select ? 'pointer' : 'text' }}
             className={inputClasses.join(' ')}
-            value={value}
+            value={selectedValue || value}
             onChange={(e) => setValue(e.target.value)}
             type="text"
             id="inp"
-            placeholder="&nbsp;"
+            placeholder={' '}
             disabled={disabled}
           />
           <span className={labelClasses.join(' ')}>{label}</span>

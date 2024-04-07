@@ -20,7 +20,7 @@ export interface OptionType {
 
 export interface OptionProps {
   option: OptionType;
-  onClick: () => void;
+  onClick: (value: string) => void;
 }
 type Coordinates = {
   top: number;
@@ -28,14 +28,23 @@ type Coordinates = {
 };
 
 function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
+  const [selectedValue, setSelectedValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [coordinates, setCoordinates] = useState<Coordinates | undefined>();
   const selectRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleTextFieldClick = () => {
     setIsOpen((prev) => !prev);
   };
+
+  const handleOptionClick = (value: string) => {
+    setIsOpen(false);
+    setSelectedValue(value);
+    inputRef.current?.focus();
+  };
+
   const updateCoordinates = (ref: RefObject<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
     if (rect) {
@@ -48,11 +57,7 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const { target } = e;
-      if (
-        target instanceof Node &&
-        !selectRef.current?.contains(target) &&
-        !dropdownRef.current?.contains(target)
-      ) {
+      if (target instanceof Node && !selectRef.current?.contains(target)) {
         setIsOpen(false);
       }
     };
@@ -66,8 +71,10 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
   return (
     <div ref={selectRef} className={styles.wrapper}>
       <TextField
+        ref={inputRef}
         variant={variant}
         select
+        selectedValue={selectedValue}
         onClick={() => {
           handleTextFieldClick();
           updateCoordinates(selectRef);
@@ -82,6 +89,7 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
             options={options}
             ref={dropdownRef}
             coordinates={coordinates}
+            onClick={handleOptionClick}
             updateCoordinates={() => updateCoordinates(selectRef)}
           />,
           document.body

@@ -7,20 +7,22 @@ export interface OptionType {
 
 export interface OptionProps {
   option: OptionType;
-  onClick: () => void;
+  onClick: (value: string) => void;
 }
 
 function Option({ option, onClick }: OptionProps) {
+  const { title } = option;
   return (
     <li
       className={styles.li}
       tabIndex={0}
       role="option"
       aria-selected
-      onClick={onClick}
-      onKeyDown={onClick}
+      value={title}
+      onClick={() => onClick(title)}
+      onKeyDown={() => onClick(title)}
     >
-      {option.title}
+      {title}
     </li>
   );
 }

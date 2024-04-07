@@ -15,10 +15,11 @@ export type DropDownProps = {
   options: OptionType[];
   coordinates: Coordinates | undefined;
   updateCoordinates: () => void;
+  onClick: (value: string) => void;
 };
 
 const Dropdown = forwardRef<HTMLDivElement, DropDownProps>(
-  ({ coordinates, options, updateCoordinates }, ref) => {
+  ({ coordinates, options, updateCoordinates, onClick }, ref) => {
     useEffect(() => {
       window.addEventListener('resize', updateCoordinates);
       return () => window.removeEventListener('resize', updateCoordinates);
@@ -28,7 +29,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropDownProps>(
       <div ref={ref} style={{ ...coordinates }} className={[styles.dropdownContainer].join(' ')}>
         <ul className={styles.optionsList}>
           {options.map((element) => (
-            <Option key={element.title} option={element} onClick={() => {}} />
+            <Option key={element.title} option={element} onClick={onClick} />
           ))}
         </ul>
       </div>
