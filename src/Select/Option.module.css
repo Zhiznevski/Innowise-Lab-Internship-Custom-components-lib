@@ -21,3 +21,11 @@
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0.04);
 }
+
+.highlighted {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.highlighted:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}

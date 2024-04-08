@@ -9,6 +9,12 @@ import { MOCK_OPTIONS } from './mockData';
 const SELECT_PADDING = 10;
 const SELECT_HEIGHT = 56;
 
+const KEY_CODES = {
+  ENTER: 'Enter',
+  ARROW_UP: 'ArrowUp',
+  ARROW_DOWN: 'ArrowDown',
+};
+
 export interface SelectProps {
   options: OptionType[];
   variant?: Variant;
@@ -31,6 +37,7 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [coordinates, setCoordinates] = useState<Coordinates | undefined>();
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
   const selectRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,6 +52,10 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
     inputRef.current?.focus();
   };
 
+  const highlightedIndexHandler = (index: number) => {
+    setHighlightedIndex(index);
+  };
+
   const updateCoordinates = (ref: RefObject<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
     if (rect) {
@@ -54,6 +65,11 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
       });
     }
   };
+
+  useEffect(() => {
+    if (isOpen && selectedValue === ' ') setHighlightedIndex(0);
+  }, [isOpen]);
+
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const { target } = e;
@@ -68,32 +84,70 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
     };
   }, []);
 
-  return (
-    <div ref={selectRef} className={styles.wrapper}>
-      <TextField
-        ref={inputRef}
-        variant={variant}
-        select
-        selectedValue={selectedValue}
-        onClick={() => {
+  useEffect(() => {
+    const keyboardHandler = (e: KeyboardEvent) => {
+      switch (e.code) {
+        case KEY_CODES.ENTER:
           handleTextFieldClick();
           updateCoordinates(selectRef);
-        }}
-      />
-      <div data-open={isOpen} className={styles.icon}>
-        <ArrowIcon />
+          if (isOpen) {
+            handleOptionClick(options[highlightedIndex].title);
+            setHighlightedIndex(highlightedIndex); // ?
+          } // Выбор подсвеченного элемента
+          break;
+        case KEY_CODES.ARROW_DOWN:
+        case KEY_CODES.ARROW_UP: {
+          if (!isOpen) {
+            handleTextFieldClick();
+            updateCoordinates(selectRef);
+            break;
+          }
+          const nextOptionIndex = highlightedIndex + (e.code === KEY_CODES.ARROW_DOWN ? 1 : -1);
+          if (nextOptionIndex >= 0 && nextOptionIndex < options.length) {
+            setHighlightedIndex(nextOptionIndex);
+          }
+          break;
+        }
+        default:
+          break;
+      }
+    };
+    selectRef.current?.addEventListener('keydown', keyboardHandler);
+    return () => {
+      selectRef.current?.removeEventListener('keydown', keyboardHandler);
+    };
+  }, [isOpen, highlightedIndex]);
+
+  return (
+    <div className={styles.container}>
+      <div ref={selectRef} className={styles.wrapper}>
+        <TextField
+          ref={inputRef}
+          variant={variant}
+          select
+          selectedValue={selectedValue}
+          onClick={() => {
+            handleTextFieldClick();
+            updateCoordinates(selectRef);
+          }}
+        />
+        <div data-open={isOpen} className={styles.icon}>
+          <ArrowIcon />
+        </div>
+        {isOpen &&
+          createPortal(
+            <Dropdown
+              options={options}
+              highlightedIndex={highlightedIndex}
+              highlightedIndexHandler={highlightedIndexHandler}
+              ref={dropdownRef}
+              coordinates={coordinates}
+              onClick={handleOptionClick}
+              updateCoordinates={() => updateCoordinates(selectRef)}
+            />,
+            document.body
+          )}
       </div>
-      {isOpen &&
-        createPortal(
-          <Dropdown
-            options={options}
-            ref={dropdownRef}
-            coordinates={coordinates}
-            onClick={handleOptionClick}
-            updateCoordinates={() => updateCoordinates(selectRef)}
-          />,
-          document.body
-        )}
     </div>
   );
 }

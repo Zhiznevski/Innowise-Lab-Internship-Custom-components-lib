@@ -16,10 +16,15 @@ export type DropDownProps = {
   coordinates: Coordinates | undefined;
   updateCoordinates: () => void;
   onClick: (value: string) => void;
+  highlightedIndexHandler: (index: number) => void;
+  highlightedIndex: number;
 };
 
 const Dropdown = forwardRef<HTMLDivElement, DropDownProps>(
-  ({ coordinates, options, updateCoordinates, onClick }, ref) => {
+  (
+    { coordinates, options, updateCoordinates, onClick, highlightedIndexHandler, highlightedIndex },
+    ref
+  ) => {
     useEffect(() => {
       window.addEventListener('resize', updateCoordinates);
       return () => window.removeEventListener('resize', updateCoordinates);
@@ -28,8 +33,15 @@ const Dropdown = forwardRef<HTMLDivElement, DropDownProps>(
     return (
       <div ref={ref} style={{ ...coordinates }} className={[styles.dropdownContainer].join(' ')}>
         <ul className={styles.optionsList}>
-          {options.map((element) => (
-            <Option key={element.title} option={element} onClick={onClick} />
+          {options.map((element, index) => (
+            <Option
+              key={element.title}
+              option={element}
+              onClick={onClick}
+              index={index}
+              highlightedIndex={highlightedIndex}
+              highlightedIndexHandler={highlightedIndexHandler}
+            />
           ))}
         </ul>
       </div>

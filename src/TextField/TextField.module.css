@@ -38,7 +38,7 @@
   transform-origin: 0 0;
   transform: translate3d(0, 0, 0);
   transition: all 0.2s ease;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .standardLabel {
@@ -187,10 +187,14 @@
 }
 
 .input:disabled:hover:not(.errorInput) {
-  pointer-events: none;
+  /* pointer-events: none; */
   border-color: rgba(0, 0, 0, 0.3);
 }
 
 .filled:disabled:hover {
   background: rgba(0, 0, 0, 0.02);
 }
+
+/* .input:not(:placeholder-shown) {
+  border-color: red;
+} */
