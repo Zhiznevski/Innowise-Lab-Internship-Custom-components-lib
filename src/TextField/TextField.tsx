@@ -49,7 +49,7 @@ const TextField = forwardRef<Ref, TextFieldProps>(
         onClick={select ? handleClick : undefined}
         role="textbox"
         tabIndex={0}
-        onKeyDown={select ? handleClick : undefined}
+        aria-hidden
       >
         <label htmlFor="inp" className={styles.wrapper}>
           <input

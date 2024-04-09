@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import styles from './Select.module.css';
 import TextField, { Variant } from '../TextField/TextField';
 import Dropdown from './Dropdown';
-import { ReactComponent as ArrowIcon } from '../TextField/icon.svg';
+import ArrowIcon from '../TextField/icon.svg';
 import { MOCK_OPTIONS } from './mockData';
 
 const SELECT_PADDING = 10;
@@ -92,8 +92,7 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
           updateCoordinates(selectRef);
           if (isOpen) {
             handleOptionClick(options[highlightedIndex].title);
-            setHighlightedIndex(highlightedIndex); // ?
-          } // Выбор подсвеченного элемента
+          }
           break;
         case KEY_CODES.ARROW_DOWN:
         case KEY_CODES.ARROW_UP: {
