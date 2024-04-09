@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import styles from './Select.module.css';
 import TextField, { Variant } from '../TextField/TextField';
 import Dropdown from './Dropdown';
-import ArrowIcon from '../TextField/icon.svg';
+import { ReactComponent as ArrowIcon } from '../TextField/icon.svg';
 import { MOCK_OPTIONS } from './mockData';
 
 const SELECT_PADDING = 10;
