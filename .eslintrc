@@ -1,5 +1,5 @@
 {
-  "plugins": ["prettier", "import",  "@typescript-eslint"],
+  "plugins": ["prettier", "import",  "@typescript-eslint", "jest"],
   "extends": [ "plugin:react/recommended","airbnb", "airbnb-typescript", "plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaVersion": 2022,
@@ -9,7 +9,8 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "rules": {
     "no-debugger": "off",

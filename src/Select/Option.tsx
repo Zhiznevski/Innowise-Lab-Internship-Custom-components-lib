@@ -31,7 +31,7 @@ function Option({
       aria-selected
       value={title}
       onClick={() => onClick(title)}
-      // onMouseEnter={() => highlightedIndexHandler(index)}
+      onMouseEnter={() => highlightedIndexHandler(index)}
       onKeyDown={() => {
         highlightedIndexHandler(index);
         onClick(title);
