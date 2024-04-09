@@ -2,12 +2,11 @@ import React, { forwardRef, useState } from 'react';
 import styles from './TextField.module.css';
 
 export type Variant = 'outlined' | 'filled' | 'standard';
-type Label = 'Outlined' | 'Filled' | 'Standard';
 
 export interface TextFieldProps {
   variant?: Variant;
   error?: boolean;
-  label?: Label;
+  label?: string;
   disabled?: boolean;
   select?: boolean;
   selectedValue?: string;
@@ -45,11 +44,12 @@ const TextField = forwardRef<Ref, TextFieldProps>(
 
     return (
       <div
+        data-testid="text-field"
         className={styles.container}
         onClick={select ? handleClick : undefined}
-        role="button"
+        role="textbox"
         tabIndex={0}
-        aria-hidden // need to fix it
+        onKeyDown={select ? handleClick : undefined}
       >
         <label htmlFor="inp" className={styles.wrapper}>
           <input
@@ -63,8 +63,11 @@ const TextField = forwardRef<Ref, TextFieldProps>(
             id="inp"
             placeholder={' '}
             disabled={disabled}
+            data-testid="text-input"
           />
-          <span className={labelClasses.join(' ')}>{label}</span>
+          <span data-testid="text-label" className={labelClasses.join(' ')}>
+            {label}
+          </span>
         </label>
       </div>
     );
