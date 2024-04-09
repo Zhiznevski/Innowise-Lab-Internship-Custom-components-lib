@@ -20,8 +20,8 @@ export function MockChildren() {
 export function Modal({ open = false, onClose = () => {}, children }: ModalProps) {
   if (!open) return null;
   return (
-    <div className={styles.windowWrapper}>
-      <div aria-hidden onClick={onClose} className={styles.background} />
+    <div data-testid="modal" className={styles.windowWrapper}>
+      <div data-testid="background" aria-hidden onClick={onClose} className={styles.background} />
       <div className={styles.window}>{children}</div>
     </div>
   );
