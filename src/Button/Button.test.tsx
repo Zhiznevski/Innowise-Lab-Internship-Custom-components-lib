@@ -82,6 +82,6 @@ describe('testing onClick event', () => {
     render(<Button onClick={onClick} />);
     const button = screen.getByRole('button');
     fireEvent.click(button);
-    expect(onClick).toHaveBeenCalled();
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
