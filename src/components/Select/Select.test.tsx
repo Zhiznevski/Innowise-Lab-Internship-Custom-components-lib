@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Select from './Select';
-import { MOCK_OPTIONS } from '../../utils/mockData';
+import MOCK_OPTIONS from '../../utils/mockData';
 
 describe('testing options props', () => {
   it('renders select with options', () => {
