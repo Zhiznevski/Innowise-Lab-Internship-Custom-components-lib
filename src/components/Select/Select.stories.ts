@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Select from './Select';
-import { MOCK_OPTIONS } from '../../utils/mockData';
+import MOCK_OPTIONS from '../../utils/mockData';
 
 const meta = {
   title: 'Select',
