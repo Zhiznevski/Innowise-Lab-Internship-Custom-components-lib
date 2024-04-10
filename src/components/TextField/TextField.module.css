@@ -1,4 +1,4 @@
-@import '../globals.css';
+@import '../../globals.css';
 
 .container {
   display: inline-block;
@@ -38,7 +38,7 @@
   transform-origin: 0 0;
   transform: translate3d(0, 0, 0);
   transition: all 0.2s ease;
-  /* pointer-events: none; */
+  pointer-events: none;
 }
 
 .standardLabel {

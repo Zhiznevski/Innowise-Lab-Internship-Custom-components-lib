@@ -1,4 +1,4 @@
-export const MOCK_OPTIONS = [
+const MOCK_OPTIONS = [
   { title: 'one' },
   { title: 'two' },
   { title: 'three' },
@@ -6,4 +6,5 @@ export const MOCK_OPTIONS = [
   { title: 'five' },
   { title: 'six' },
 ];
-export const data = [];
+
+export default MOCK_OPTIONS;

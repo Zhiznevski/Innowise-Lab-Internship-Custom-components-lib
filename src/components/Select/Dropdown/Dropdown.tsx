@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect } from 'react';
 import styles from './Dropdown.module.css';
-import Option from './Option';
+import Option from '../Option/Option';
 
 type Coordinates = {
   top: number;

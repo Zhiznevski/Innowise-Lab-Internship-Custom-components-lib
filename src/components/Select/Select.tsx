@@ -2,9 +2,10 @@ import React, { RefObject, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Select.module.css';
 import TextField, { Variant } from '../TextField/TextField';
-import Dropdown from './Dropdown';
+import Dropdown from './Dropdown/Dropdown';
 import ArrowIcon from '../TextField/icon.svg';
-import { MOCK_OPTIONS } from './mockData';
+import MOCK_OPTIONS from '../../utils/mockData';
+import useClickOutside from '../../utils/useClickOutside';
 
 const SELECT_PADDING = 10;
 const SELECT_HEIGHT = 56;
@@ -13,11 +14,13 @@ const KEY_CODES = {
   ENTER: 'Enter',
   ARROW_UP: 'ArrowUp',
   ARROW_DOWN: 'ArrowDown',
+  ESCAPE: 'Escape',
 };
 
 export interface SelectProps {
   options: OptionType[];
   variant?: Variant;
+  id?: string;
 }
 
 export interface OptionType {
@@ -33,7 +36,7 @@ type Coordinates = {
   left: number;
 };
 
-function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
+function Select({ variant = 'outlined', options = MOCK_OPTIONS, id }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [coordinates, setCoordinates] = useState<Coordinates | undefined>();
@@ -41,6 +44,8 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
   const selectRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useClickOutside(selectRef, () => setIsOpen(false));
 
   const handleTextFieldClick = () => {
     setIsOpen((prev) => !prev);
@@ -67,32 +72,18 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
   };
 
   useEffect(() => {
-    if (isOpen && selectedValue === ' ') setHighlightedIndex(0);
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      const { target } = e;
-      if (target instanceof Node && !selectRef.current?.contains(target)) {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener('click', handleClick);
-
-    return () => {
-      window.removeEventListener('click', handleClick);
-    };
-  }, []);
-
-  useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
       switch (e.code) {
         case KEY_CODES.ENTER:
           handleTextFieldClick();
           updateCoordinates(selectRef);
+          inputRef.current?.focus();
           if (isOpen) {
             handleOptionClick(options[highlightedIndex].title);
           }
+          break;
+        case KEY_CODES.ESCAPE:
+          setIsOpen(false);
           break;
         case KEY_CODES.ARROW_DOWN:
         case KEY_CODES.ARROW_UP: {
@@ -108,7 +99,6 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
           break;
         }
         default:
-          break;
       }
     };
     selectRef.current?.addEventListener('keydown', keyboardHandler);
@@ -121,6 +111,7 @@ function Select({ variant = 'outlined', options = MOCK_OPTIONS }: SelectProps) {
     <div className={styles.container}>
       <div ref={selectRef} className={styles.wrapper}>
         <TextField
+          id={id}
           ref={inputRef}
           variant={variant}
           select

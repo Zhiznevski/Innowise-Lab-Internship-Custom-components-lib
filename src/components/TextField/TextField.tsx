@@ -10,6 +10,7 @@ export interface TextFieldProps {
   disabled?: boolean;
   select?: boolean;
   selectedValue?: string;
+  id?: string;
   onClick?: () => void;
 }
 
@@ -23,6 +24,7 @@ const TextField = forwardRef<Ref, TextFieldProps>(
       disabled = false,
       select = false,
       selectedValue,
+      id,
       onClick,
     }: TextFieldProps,
     ref
@@ -51,7 +53,7 @@ const TextField = forwardRef<Ref, TextFieldProps>(
         tabIndex={0}
         aria-hidden
       >
-        <label htmlFor="inp" className={styles.wrapper}>
+        <label htmlFor={id} className={styles.wrapper}>
           <input
             ref={ref}
             readOnly={select}
@@ -60,7 +62,7 @@ const TextField = forwardRef<Ref, TextFieldProps>(
             value={selectedValue || value}
             onChange={(e) => setValue(e.target.value)}
             type="text"
-            id="inp"
+            id={id}
             placeholder={' '}
             disabled={disabled}
             data-testid="text-input"

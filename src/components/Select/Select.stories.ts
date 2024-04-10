@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Select from './Select';
-import { MOCK_OPTIONS } from './mockData';
+import { MOCK_OPTIONS } from '../../utils/mockData';
 
 const meta = {
   title: 'Select',
@@ -17,5 +17,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     options: MOCK_OPTIONS,
+    id: 'select-id',
   },
 };
